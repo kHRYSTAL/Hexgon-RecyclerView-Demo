@@ -90,19 +90,7 @@ public class HiveRecyclerView extends RecyclerView {
         });
 
         setLayoutManager(mLayoutManager);
-        setHasFixedSize(true);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         addItemDecoration(new HorizontalOverlapDecorator(mRowSize, mHorizontalSpacing, mVerticalSpacing));
     }
-
-//    @Override
-//    public void onScrollStateChanged(int state) {
-//        post(new Runnable() {
-//            @Override
-//            public void run() {
-//                scrollBy(1, 0);
-//            }
-//        });
-//
-//    }
 }

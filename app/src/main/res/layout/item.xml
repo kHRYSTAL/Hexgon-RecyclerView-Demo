@@ -2,16 +2,17 @@
 <me.khrystal.widget.HorizontalHiveLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemLayout"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent">
     <me.khrystal.widget.HorizontalHiveImageView
         android:id="@+id/itemIv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent" />
     <TextView
         android:id="@+id/itemTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:text="asas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         />
 </me.khrystal.widget.HorizontalHiveLayout>

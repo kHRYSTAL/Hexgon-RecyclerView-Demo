@@ -49,6 +49,28 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.CustomView
 
     }
 
+    /**
+     *  TODO not work
+     * @param holder
+     */
+    @Override
+    public void onViewDetachedFromWindow(CustomViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        if (holder != null && holder.itemView != null)
+            holder.itemView.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * TODO not work
+     * @param holder
+     */
+    @Override
+    public void onViewAttachedToWindow(CustomViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        if (holder != null && holder.itemView != null)
+            holder.itemView.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public int getItemCount() {
         if (images == null) {

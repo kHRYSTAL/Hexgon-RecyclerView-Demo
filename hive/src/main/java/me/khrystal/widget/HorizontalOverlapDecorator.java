@@ -29,6 +29,10 @@ public class HorizontalOverlapDecorator extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view);
 
+        if (position == RecyclerView.NO_POSITION) {
+            return;
+        }
+
         int itemsInTwoRows = mRowSize * 2 - 1;
         int itemsCountInSmallRow = mRowSize - 1;
         int smallRowPaddingTopBottom = parent.getHeight() / (mRowSize * 2);
