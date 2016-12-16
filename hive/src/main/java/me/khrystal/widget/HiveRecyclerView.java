@@ -2,19 +2,14 @@ package me.khrystal.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ViewTreeObserver;
+import android.view.View;
 import android.view.WindowManager;
-
-import static android.R.attr.orientation;
-
 /**
  * usage:
  * author: kHRYSTAL
@@ -41,6 +36,8 @@ public class HiveRecyclerView extends RecyclerView {
 
     /** orientation */
     private int mOrientation = DEFAULT_ORIENTATION;
+
+    private ItemViewMode mItemViewMode;
 
     public HiveRecyclerView(Context context) {
         this(context, null);
@@ -83,14 +80,33 @@ public class HiveRecyclerView extends RecyclerView {
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if ((position % itemsInTwoRows >= 0) && (position % itemsInTwoRows <= itemsCountInSmallRow - 1))
+                if ((position % itemsInTwoRows >= 0) && (position % itemsInTwoRows <= itemsCountInSmallRow - 1)) {
+                    Log.e("RowSize", "mRowSize:" + mRowSize);
                     return mRowSize;
+                }
+                Log.e("RowSize:", "itemsCountInSmallRow:" + itemsCountInSmallRow);
                 return itemsCountInSmallRow;
             }
         });
 
         setLayoutManager(mLayoutManager);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        addItemDecoration(new HorizontalOverlapDecorator(mRowSize, mHorizontalSpacing, mVerticalSpacing));
+//        addItemDecoration(new HorizontalOverlapDecorator(mRowSize, mHorizontalSpacing, mVerticalSpacing));
+    }
+
+    public void setItemViewMode(ItemViewMode itemViewMode) {
+        mItemViewMode = itemViewMode;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (mItemViewMode != null) {
+            final int count = getChildCount();
+            for (int i = 0; i < count; ++i) {
+                View view = getChildAt(i);
+                mItemViewMode.applyToView(view, this);
+            }
+        }
     }
 }
