@@ -11,6 +11,7 @@ import java.util.List;
 
 import me.khrystal.widget.HiveLayout;
 import me.khrystal.widget.HorizontalHiveImageView;
+import me.khrystal.widget.VerticalHiveImageView;
 
 /**
  * usage:
@@ -34,7 +35,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.CustomView
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_v, parent, false);
         return new CustomViewHolder(view, clicksListener);
     }
 
@@ -100,7 +101,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.CustomView
 
         HiveLayout layout;
         ViewHolderClicks clicksListener;
-        HorizontalHiveImageView imageView;
+        VerticalHiveImageView imageView;
         TextView textView;
         int resId;
 
@@ -108,7 +109,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.CustomView
             super(view);
             this.clicksListener = clicksListener;
             layout = (HiveLayout) view.findViewById(R.id.itemLayout);
-            imageView = (HorizontalHiveImageView) layout.findViewById(R.id.itemIv);
+            imageView = (VerticalHiveImageView) layout.findViewById(R.id.itemIv);
             textView = (TextView) layout.findViewById(R.id.itemTv);
             layout.setOnClickListener(this);
         }

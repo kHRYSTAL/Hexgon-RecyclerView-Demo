@@ -5,8 +5,16 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <me.khrystal.widget.HiveRecyclerView
-        android:id="@+id/rV"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"></me.khrystal.widget.HiveRecyclerView>
+    <!--<me.khrystal.widget.HiveRecyclerView-->
+        <!--android:id="@+id/rV"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="300dp"></me.khrystal.widget.HiveRecyclerView>-->
+        <me.khrystal.widget.HiveRecyclerView
+            android:id="@+id/rV"
+            app:items_count_in_row="3"
+            app:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </me.khrystal.widget.HiveRecyclerView>
 </RelativeLayout>

@@ -37,10 +37,10 @@ public class HiveRecyclerView extends RecyclerView {
     private float mVerticalSpacing;
 
     /** row size */
-    private int mRowSize = SIZE;
+    private int mRowSize;
 
     /** orientation */
-    private int mOrientation = DEFAULT_ORIENTATION;
+    private int mOrientation;
 
     public HiveRecyclerView(Context context) {
         this(context, null);
@@ -62,13 +62,16 @@ public class HiveRecyclerView extends RecyclerView {
                 .getSystemService(Context.WINDOW_SERVICE);
 
         int width = wm.getDefaultDisplay().getWidth();
-        setMinimumWidth(width-30);
+        setMinimumWidth(width - 30);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.HiveRecyclerView);
         mHorizontalSpacing = ta.getDimension(R.styleable.HiveRecyclerView_hive_horizontal_spacing, 0.0f);
         mVerticalSpacing = ta.getDimension(R.styleable.HiveRecyclerView_hive_vertical_spacing, 0.0f);
+        mRowSize = ta.getInt(R.styleable.HiveRecyclerView_items_count_in_row, SIZE);
+        mOrientation = ta.getInt(R.styleable.HiveRecyclerView_orientation, DEFAULT_ORIENTATION);
         ta.recycle();
-
+        if (mRowSize < 2)
+            throw new RuntimeException("Hexagon RecyclerView row_size can't be smaller than 2");
         final int itemsInTwoRows = mRowSize * 2 - 1;
         final int itemsCountInSmallRow = mRowSize - 1;
 
@@ -78,7 +81,7 @@ public class HiveRecyclerView extends RecyclerView {
             protected int getExtraLayoutSpace(State state) {
                 return 300;
             }
-        } ;
+        };
 
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -90,7 +93,13 @@ public class HiveRecyclerView extends RecyclerView {
         });
 
         setLayoutManager(mLayoutManager);
-        mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        addItemDecoration(new HorizontalOverlapDecorator(mRowSize, mHorizontalSpacing, mVerticalSpacing));
+        if (orientation == 0) {
+            mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            addItemDecoration(new HorizontalOverlapDecorator(mRowSize, mHorizontalSpacing, mVerticalSpacing));
+        } else {
+            mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            addItemDecoration(new VerticalOverlapDecorator(mRowSize, mHorizontalSpacing, mVerticalSpacing));
+        }
+
     }
 }

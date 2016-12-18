@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.khrystal.widget.VerticalHiveLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+    <me.khrystal.widget.VerticalHiveImageView
+        android:id="@+id/itemIv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/itemTv"
+        android:text="asas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        />
+</me.khrystal.widget.VerticalHiveLayout>

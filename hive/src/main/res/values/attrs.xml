@@ -3,5 +3,10 @@
     <declare-styleable name="HiveRecyclerView">
         <attr name="hive_horizontal_spacing" format="dimension" />
         <attr name="hive_vertical_spacing" format="dimension" />
+        <attr name="items_count_in_row" format="integer" />
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
     </declare-styleable>
 </resources>
