@@ -40,21 +40,24 @@ public class VerticalOverlapDecorator extends RecyclerView.ItemDecoration {
         double offset_left = 0;
         double offset_right = 0;
 
-        // the factor the will be used to shif the items in the middle of the small row
+        // the factor the will be used to shift the items in the middle of the small row
         double shift_factor = 1.5 * itemsCountInSmallRow - mRowSize;
 
-        if (((position % itemsInTwoRows) >= 0) && ((position % itemsInTwoRows) < itemsCountInSmallRow)) {
+        if (((position % itemsInTwoRows) >= 0) && ((position % itemsInTwoRows) > mRowSize)) {
             offset_left = (shift_factor - ((position % itemsInTwoRows) - 1)) * smallRow_padding_item_squeez;
             offset_right = ((position % itemsInTwoRows) - shift_factor) * smallRow_padding_item_squeez;
 
         }
 
         //adjust the offset_left of the first item in the small row to be half of the size of one item in the big row
-        if ((position % itemsInTwoRows) == 0) {
+        if ((position % itemsInTwoRows) == mRowSize) {
+            if (position % itemsInTwoRows != itemsInTwoRows - 1);
             offset_left = smallRow_padding_top_bottom;
         }
         //adjust the offset_right of the last item in the small row to be half of the size of one item in the big row
-        if ((position % itemsInTwoRows) == itemsCountInSmallRow - 1) {
+        if ((position % itemsInTwoRows) == itemsInTwoRows - 1) {
+            if (position % itemsInTwoRows != mRowSize)
+                offset_left = 0;
             offset_right = smallRow_padding_top_bottom;
         }
 

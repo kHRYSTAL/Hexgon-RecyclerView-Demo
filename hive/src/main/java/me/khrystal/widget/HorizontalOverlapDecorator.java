@@ -52,7 +52,7 @@ public class HorizontalOverlapDecorator extends RecyclerView.ItemDecoration {
         }
 
         if ((position % itemsInTwoRows) == 0) {
-            offsetUp = smallRowPaddingTopBottom ;
+            offsetUp = smallRowPaddingTopBottom;
         }
         if ((position % itemsInTwoRows) == itemsCountInSmallRow - 1) {
             offsetDown = smallRowPaddingTopBottom;

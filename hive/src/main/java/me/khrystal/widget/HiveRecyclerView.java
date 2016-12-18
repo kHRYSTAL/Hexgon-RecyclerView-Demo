@@ -75,7 +75,7 @@ public class HiveRecyclerView extends RecyclerView {
         final int itemsInTwoRows = mRowSize * 2 - 1;
         final int itemsCountInSmallRow = mRowSize - 1;
 
-        GridLayoutManager mLayoutManager = new GridLayoutManager(context, mRowSize * itemsCountInSmallRow) {
+        HiveLayoutManager mLayoutManager = new HiveLayoutManager(context, mRowSize * itemsCountInSmallRow) {
 
             @Override
             protected int getExtraLayoutSpace(State state) {
@@ -86,14 +86,21 @@ public class HiveRecyclerView extends RecyclerView {
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if ((position % itemsInTwoRows >= 0) && (position % itemsInTwoRows <= itemsCountInSmallRow - 1))
+                if (mOrientation == 0) {
+                    if ((position % itemsInTwoRows >= 0) && (position % itemsInTwoRows <= itemsCountInSmallRow - 1))
+                        return mRowSize;
+                    return itemsCountInSmallRow;
+                } else {
+                    if ((position % itemsInTwoRows >= 0) && (position % itemsInTwoRows <= itemsCountInSmallRow))
+                        return itemsCountInSmallRow;
                     return mRowSize;
-                return itemsCountInSmallRow;
+                }
+
             }
         });
 
         setLayoutManager(mLayoutManager);
-        if (orientation == 0) {
+        if (mOrientation == 0) {
             mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             addItemDecoration(new HorizontalOverlapDecorator(mRowSize, mHorizontalSpacing, mVerticalSpacing));
         } else {
